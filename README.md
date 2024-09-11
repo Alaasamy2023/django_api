@@ -139,3 +139,21 @@ api
 
 هكذا قمنا بانشاء نوعين اخرين من المستخدمين زبون وشركه ومربوط بجدول اليوزر 
 
+# 05 create Post & Permission models 
+
+1- add Post & Permission models
+2-  add Post & Permission in  admin.py
+
+
+3- python manage.py makemigrations
+4- python manage.py migrate
+
+قمنا بانشاء جدول صلاحيات وجدول للمنشورات 
+
+
+
+
+
+
+
+
