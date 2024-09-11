@@ -93,8 +93,27 @@ REST_FRAMEWORK = {
 
 
 
+# 04 add urls in api app 
+
+1- in project 
+
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    path('', include('api.urls',)),
+
+]
 
 
+
+2- in api app 
+  create urls.py 
+
+
+  
 
 
 
