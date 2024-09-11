@@ -1,10 +1,6 @@
 from django.urls import include, path
 
 from . import generatecode
-from . import views
-# from rest_framework.authtoken import views as authTokenVeiw
-from knox import views as knox_views # type: ignore
-from .views import PostViewSet
 
 app_name='api'
 
@@ -25,11 +21,11 @@ app_name='api'
 
 urlpatterns = [
  
-    # # Ex 3: For generate_code_view function-based view
-    # path('generate-code/', generatecode.generate_code_view, name='generate_code'),
+    # Ex 3: For generate_code_view function-based view
+    path('generate-code/', generatecode.generate_code_view, name='generate_code'),
 
-    # # Ex 4: For GenerateCodeView_cbv class-based view
-    # path('generate-code-cbv/', generatecode.GenerateCodeView_cbv.as_view(), name='generate_code_cbv'),
+    # Ex 4: For GenerateCodeView_cbv class-based view
+    path('generate-code-cbv/', generatecode.GenerateCodeView_cbv.as_view(), name='generate_code_cbv'),
 
     # # Ex 5: For RegistrationAPI APIView
     # path('register/', views.RegistrationAPI.as_view(), name='register'),

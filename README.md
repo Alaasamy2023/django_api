@@ -113,7 +113,19 @@ urlpatterns = [
   create urls.py 
 
 
-  
 
+
+
+
+# 05 add generatecode 
+1- creat generatecode.py
+2- edit urls.py in api app 
+    add url 
+
+هنا استخدمت ال 
+function b v 
+class b v 
+باستخدام ال
+api 
 
 
