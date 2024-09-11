@@ -129,3 +129,13 @@ class b v
 api 
 
 
+# 05 create Customer & company models 
+1- add  Customer & company in  models
+2-  add Customer & company in  admin.py
+
+3- python manage.py makemigrations
+4- python manage.py migrate
+
+
+هكذا قمنا بانشاء نوعين اخرين من المستخدمين زبون وشركه ومربوط بجدول اليوزر 
+
