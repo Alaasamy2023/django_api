@@ -139,7 +139,7 @@ api
 
 هكذا قمنا بانشاء نوعين اخرين من المستخدمين زبون وشركه ومربوط بجدول اليوزر 
 
-# 05 create Post & Permission models 
+# 06 create Post & Permission models 
 
 1- add Post & Permission models
 2-  add Post & Permission in  admin.py
@@ -149,6 +149,16 @@ api
 4- python manage.py migrate
 
 قمنا بانشاء جدول صلاحيات وجدول للمنشورات 
+
+
+
+
+
+# 07 show all post api 
+
+
+
+هذا الكود قمنا بعرض كل المنشورات لكل اليوزر بدون اى فلتر مع اظهار اسم المستخدم على كل منشور 
 
 
 

@@ -1,5 +1,7 @@
 from django.urls import include, path
 
+from .views import PostListAPIView
+
 
 from . import generatecode
 
@@ -16,6 +18,19 @@ urlpatterns = [
 
     # Ex 4: For GenerateCodeView_cbv class-based view
     path('generate-code-cbv/', generatecode.GenerateCodeView_cbv.as_view(), name='generate_code_cbv'),
+
+
+
+
+
+
+
+
+
+
+
+    path('api/posts/', PostListAPIView.as_view(), name='post-list'),
+
 
 
 ]
