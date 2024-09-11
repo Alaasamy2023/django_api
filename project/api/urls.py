@@ -2,6 +2,7 @@ from django.urls import include, path
 
 from .views import PostListAPIView ,PostDetailAPIView
 
+from . import views
 
 from . import generatecode
 
@@ -21,6 +22,8 @@ urlpatterns = [
 
 
 
+    # Ex 5: For RegistrationAPI APIView
+    path('register/', views.RegistrationAPI.as_view(), name='register'),
 
 
 
