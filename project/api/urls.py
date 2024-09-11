@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from .views import PostListAPIView
+from .views import PostListAPIView ,PostDetailAPIView
 
 
 from . import generatecode
@@ -30,6 +30,7 @@ urlpatterns = [
 
 
     path('api/posts/', PostListAPIView.as_view(), name='post-list'),
+    path('api/posts/<int:pk>/', PostDetailAPIView.as_view(), name='post-detail'),
 
 
 

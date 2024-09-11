@@ -163,7 +163,10 @@ api
 
 
 
+# 08 show  post  detales in one post   api 
 
 
+
+عند زيارة مسار URL مثل /posts/1/، سيتم استرجاع تفاصيل المنشور الذي يحمل pk=1 بتنسيق JSON. على سبيل المثال:
 
 
