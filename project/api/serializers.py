@@ -7,7 +7,8 @@ from django.contrib.auth.models import User, Group,Permission
 
 
 
-
+from django.contrib.auth import authenticate
+from .services import UserService, CustomerService
 
 
 
@@ -73,6 +74,58 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 # ----------------------------
 # ----------------------------
+
+#  login and remember me 
+class LoginUserSerializer(serializers.Serializer):
+    username_or_email_or_phone = serializers.CharField()
+    password = serializers.CharField()
+    remember_me = serializers.BooleanField(required=False, default=False)
+    user_type = serializers.CharField(read_only=True)
+
+    def validate(self, data):
+        username_or_email_or_phone = data.get('username_or_email_or_phone')
+        password = data.get('password')
+        remember_me = data.get('remember_me', False)  # استخدم القيمة الافتراضية False إذا لم يكن remember_me موجودًا
+
+        # التحقق مما إذا كانت قيمة المستخدم اسم المستخدم أو بريد إلكتروني أو رقم هاتف
+        user = None
+        if '@' in username_or_email_or_phone:
+            # إذا كانت القيمة تشبه عنوان بريد إلكتروني
+            try:
+                user = User.objects.get(email=username_or_email_or_phone)
+            except User.DoesNotExist:
+                pass
+        elif username_or_email_or_phone.isdigit():
+            # إذا كانت القيمة تشبه رقم هاتف
+            try:
+                customer = Customer.objects.get(phone_number=username_or_email_or_phone)
+                user = customer.user
+            except Customer.DoesNotExist:
+                pass
+        else:
+            # قيمة عادية لاسم المستخدم
+            user = authenticate(username=username_or_email_or_phone, password=password)
+
+        if user and user.is_active:
+            # التحقق مما إذا كان المستخدم لديه زبون أو شركة
+            if Customer.objects.filter(user=user).exists():
+                user_type = 'customer'
+            elif Company.objects.filter(user=user).exists():
+                user_type = 'company'
+            else:
+                user_type = None
+
+            return {'user': user, 'user_type': user_type, 'remember_me': remember_me}
+
+        raise serializers.ValidationError("بيانات غير صالحة.")
+
+# ----------------------------
+# ----------------------------
+# ----------------------------
+# ----------------------------
+
+
+
 
 
 

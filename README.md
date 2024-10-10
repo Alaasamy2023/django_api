@@ -302,6 +302,57 @@ class AlaaPostsAPIView(generics.ListAPIView):
 
 
 
+# 013    login in system 
+
+
+يجب اضافه ف urls 
+
+    path('login/', views.LoginAPI.as_view(), name='login'),
+
+
+فقط التوجه لل view 
+
+
+# login and remember me
+
+class LoginAPI(generics.GenericAPIView):
+    serializer_class = LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user_data = serializer.validated_data
+        user = user_data['user']
+        user_type = user_data.get('user_type')  # احصل على نوع المستخدم
+        remember_me = user_data.get('remember_me', False)  # احصل على قيمة تذكرني
+
+        # استرداد الصلاحيات والمعلومات الأخرى عبر السيريالايزر
+        user_serializer = UserSerializer(user, context=self.get_serializer_context())
+        user_data_with_permissions = user_serializer.data
+
+        # إعداد عمر رمز المصادقة بناءً على قيمة تذكرني
+        if remember_me:
+            expiry = datetime.timedelta(days=30)
+        else:
+            expiry = CONSTANTS.TOKEN_TTL
+
+        # إنشاء رمز المصادقة
+        token = AuthToken.objects.create(user, expiry=expiry)[1]
+
+        return Response({
+            "user": user_data_with_permissions,
+            "token": token,
+            "user_type": user_type  # أرجع نوع المستخدم أيضًا
+        }, status=status.HTTP_200_OK)
+
+
+
+
+
+يجب اضافه ملف ال 
+services.py
+
+
 
 
 

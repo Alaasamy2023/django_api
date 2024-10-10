@@ -26,6 +26,8 @@ urlpatterns = [
     path('register/', views.RegistrationAPI.as_view(), name='register'),
 
 
+    # Ex 6: For LoginAPI APIView
+    path('login/', views.LoginAPI.as_view(), name='login'),
 
 
 
