@@ -174,3 +174,59 @@ api
 
 
 
+
+
+
+
+
+
+
+# 010  حذف post  من السيستم 
+
+
+يجب اضافه ف urls 
+    path('posts/<int:pk>/delete/', views.PostDeleteAPIView.as_view(), name='post_delete'),  # URL لحذف المنشور
+
+
+
+فقط التوجه لل view 
+
+# ----------------------------
+# الحذف فقط 
+
+class PostDeleteAPIView(generics.DestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    # permission_classes = [IsAuthenticated]  # تحديد صلاحيات الوصول
+    # لا تحتاج لدالة destroy() إلا إذا كنت بحاجة لتخصيص سلوك الحذف
+    # يمكنك تعيين أي سلوك إضافي لعملية الحذف هنا
+
+# ----------------------------
+# ----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

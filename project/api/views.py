@@ -55,3 +55,25 @@ class PostListAPIView(generics.ListAPIView):
 class PostDetailAPIView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+
+
+
+
+
+
+
+
+# ----------------------------
+# الحذف فقط 
+
+class PostDeleteAPIView(generics.DestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    # permission_classes = [IsAuthenticated]  # تحديد صلاحيات الوصول
+    # لا تحتاج لدالة destroy() إلا إذا كنت بحاجة لتخصيص سلوك الحذف
+    # يمكنك تعيين أي سلوك إضافي لعملية الحذف هنا
+
+# ----------------------------
+# ----------------------------
