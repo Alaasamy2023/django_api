@@ -206,6 +206,62 @@ class PostDeleteAPIView(generics.DestroyAPIView):
 
 
 
+# 011 لعرض كل البوست عموما 
+يجب اضافه ف urls 
+    path('posts/all/', views.PostListAPIView.as_view(), name='post_list'),  # URL لعرض جميع المنشورات
+
+
+
+فقط التوجه لل view 
+
+
+
+# ----------------------------
+# لعرض كل البوست 
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        author_id = self.request.data.get('author_id')
+        user = self.request.user
+        
+        if author_id:
+            try:
+                author = User.objects.get(id=author_id)
+            except User.DoesNotExist:
+                return Response({"error": "Invalid author ID provided."}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            author = user if user.is_authenticated else None
+
+        if author:
+            serializer.save(author=author, author_id=author.id)
+        else:
+            return Response({"error": "You must provide a valid author ID or be authenticated to create a post."}, status=status.HTTP_403_FORBIDDEN)
+
+    def perform_update(self, serializer):
+        author_id = self.request.data.get('author_id')
+        user = self.request.user
+        instance = serializer.instance
+
+        if author_id:
+            try:
+                author = User.objects.get(id=author_id)
+            except User.DoesNotExist:
+                return Response({"error": "Invalid author ID provided."}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            author = instance.author  # Keep the current author if no new one is specified
+
+        if author:
+            serializer.save(author=author, author_id=author.id)
+        else:
+            return Response({"error": "You must provide a valid author ID to update the post."}, status=status.HTTP_400_BAD_REQUEST)
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
 
 
 

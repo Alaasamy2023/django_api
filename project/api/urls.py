@@ -37,6 +37,9 @@ urlpatterns = [
     path('posts/<int:pk>/delete/', views.PostDeleteAPIView.as_view(), name='post_delete'),  # URL لحذف المنشور
 
 
+    path('posts/all/', views.PostListAPIView.as_view(), name='post_list'),  # URL لعرض جميع المنشورات
+
+
 
 ]
 
