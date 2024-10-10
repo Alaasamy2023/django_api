@@ -5,6 +5,7 @@ from .views import PostListAPIView ,PostDetailAPIView
 from . import views
 
 from . import generatecode
+from knox import views as knox_views # type: ignore
 
 app_name='api'
 
@@ -29,6 +30,8 @@ urlpatterns = [
     # Ex 6: For LoginAPI APIView
     path('login/', views.LoginAPI.as_view(), name='login'),
 
+    # Ex 11: For LogoutView provided by knox
+    path('logout/', knox_views.LogoutView.as_view(), name='logout'),
 
 
 

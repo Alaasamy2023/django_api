@@ -358,6 +358,22 @@ services.py
 
 
 
+# 014 logout the system 
+
+
+
+يجب اضافه ف urls 
+    path('logout/', knox_views.LogoutView.as_view(), name='logout'),
+
+فقط هو بيخرج التوكين فقط 
+
+
+
+
+
+
+
+
 
 
 
