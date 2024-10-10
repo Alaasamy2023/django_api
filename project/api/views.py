@@ -136,3 +136,13 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 # ----------------------------
+# ----------------------------
+# لعرض كل البوست الخاصه بعلاء
+
+class AlaaPostsAPIView(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(author__username='alaa')
+
+# ----------------------------

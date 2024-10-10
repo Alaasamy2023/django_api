@@ -39,6 +39,7 @@ urlpatterns = [
 
     path('posts/all/', views.PostListAPIView.as_view(), name='post_list'),  # URL لعرض جميع المنشورات
 
+    path('posts/all/alaa/', views.AlaaPostsAPIView.as_view(), name='alaa_posts'),  # URL لعرض منشورات Alaa
 
 
 ]

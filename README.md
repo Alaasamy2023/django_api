@@ -267,9 +267,37 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 
+# 012 لعرض كل المنشورات الخاصه بعلاء فقط 
 
 
 
+يجب اضافه ف urls 
+
+
+
+
+
+    path('posts/all/alaa/', views.AlaaPostsAPIView.as_view(), name='alaa_posts'),  # URL لعرض منشورات Alaa
+
+
+
+فقط التوجه لل view 
+
+
+
+
+
+# ----------------------------
+# ----------------------------
+# لعرض كل البوست الخاصه بعلاء
+
+class AlaaPostsAPIView(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(author__username='alaa')
+
+# ----------------------------
 
 
 
